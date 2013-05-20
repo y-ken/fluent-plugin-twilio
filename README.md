@@ -56,6 +56,10 @@ $ tail -f /var/log/td-agent/td-agent.log
 * Twilio https://www.twilio.com/
 * Twilio Japan http://twilio.kddi-web.com/
 
+## Blog Articles
+
+* http://y-ken.hatenablog.com/entry/fluent-plugin-twilio-has-released
+
 ## TODO
 Pull requests are very welcome!!
 
