@@ -37,7 +37,7 @@ fluent_logger.post('notify.call', {
   type twilio
   account_sid     TWILIO_ACCOUNT_SID  # Required
   auth_token      TWILIO_AUTH_TOKEN   # Required
-  from_number     +8112345678         # Required
+  from_number     +81312345678        # Required with country code
   default_number  090-1234-5678       # Optional
 </match>
 `````
@@ -60,7 +60,7 @@ $ tail -f /var/log/td-agent/td-agent.log
 Pull requests are very welcome!!
 
 ## Copyright
-Copyright © 2013- Kentaro Yoshida (@yoshi_ken)
+Copyright © 2013- Kentaro Yoshida ([@yoshi_ken](https://twitter.com/yoshi_ken))
 
 ## License
 Apache License, Version 2.0
