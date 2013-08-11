@@ -1,5 +1,5 @@
-class Fluent::TwilioOutput < Fluent::Output
-  Fluent::Plugin.register_output('twilio', self)
+class Fluentd::Plugin::TwilioOutput < Fluentd::Output
+  Fluentd::Plugin.register_output('twilio', self)
 
   config_param :account_sid, :string
   config_param :auth_token, :string
@@ -37,14 +37,14 @@ class Fluent::TwilioOutput < Fluent::Output
     end
     xml = response.text.sub(/<[^>]+?>/, '')
     url = "http://twimlets.com/echo?Twiml=#{URI.escape(xml)}"
-    $log.info "twilio: generateing twiml: #{xml}"
+    Fluentd.log.info "twilio: generateing twiml: #{xml}"
 
     client = Twilio::REST::Client.new(@account_sid, @auth_token)
     account = client.account
     begin
       call = account.calls.create({:from => @from_number, :to => number, :url => url})
     rescue => e
-      $log.error "twilio: Error: #{e.message}"
+      Fluentd.log.error "twilio: Error: #{e.message}"
     end
   end
 end

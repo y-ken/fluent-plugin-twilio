@@ -1,4 +1,4 @@
-fluent-plugin-twilio
+fluentd-plugin-twilio
 =====================
 
 ## Overview
@@ -8,12 +8,12 @@ Fluentd Output plugin to make a call with twilio.
 
 ### native gem
 `````
-gem install fluent-plugin-twilio
+gem install fluentd-plugin-twilio
 `````
 
 ### td-agent gem
 `````
-/usr/lib64/fluent/ruby/bin/fluent-gem install fluent-plugin-twilio
+/usr/lib64/fluent/ruby/bin/fluent-gem install fluentd-plugin-twilio
 `````
 
 ## Configuration
