@@ -24,7 +24,6 @@ class TwilioOutputTest < Test::Unit::TestCase
       auth_token   TWILIO_AUTH_TOKEN
       from_number  +8112345678
     ]
-    d.instance.inspect
     assert_equal 'TWILIO_ACCOUNT_SID', d.instance.account_sid
     assert_equal 'TWILIO_AUTH_TOKEN', d.instance.auth_token
     assert_equal '+8112345678', d.instance.from_number
