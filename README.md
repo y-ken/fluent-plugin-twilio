@@ -35,10 +35,10 @@ fluent_logger.post('notify.call', {
 
 <match notify.call>
   type twilio
-  account_sid     TWILIO_ACCOUNT_SID  # Required
-  auth_token      TWILIO_AUTH_TOKEN   # Required
-  from_number     +81312345678        # Required with country code
-  default_number  090-1234-5678       # Optional
+  account_sid     TWILIO_ACCOUNT_SID           # Required
+  auth_token      TWILIO_AUTH_TOKEN            # Required
+  from_number     +81312345678                 # Required with country code
+  default_number  +819012345678,+818012345678  # Optional with to number(comma separated)
 </match>
 `````
 
