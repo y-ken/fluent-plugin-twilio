@@ -8,7 +8,12 @@ class Fluent::TwilioOutput < Fluent::Output
   config_param :default_voice, :string, :default => 'woman'
   config_param :language, :string, :default => 'ja-jp'
 
-  VOICE_MAP = ['woman']
+  VOICE_MAP = ['man', 'woman']
+
+  # Define `log` method for v0.10.42 or earlier
+  unless method_defined?(:log)
+    define_method("log") { $log }
+  end
 
   def initialize
     super
@@ -37,7 +42,7 @@ class Fluent::TwilioOutput < Fluent::Output
     end
     xml = response.text.sub(/<[^>]+?>/, '')
     url = "http://twimlets.com/echo?Twiml=#{URI.escape(xml)}"
-    $log.info "twilio: generateing twiml: #{xml}"
+    log.info "twilio: generateing twiml: #{xml}"
 
     client = Twilio::REST::Client.new(@account_sid, @auth_token)
     account = client.account
@@ -45,7 +50,7 @@ class Fluent::TwilioOutput < Fluent::Output
       begin
         call = account.calls.create({:from => @from_number, :to => to_number, :url => url})
       rescue => e
-        $log.error "twilio: Error: #{e.message}"
+        log.error "twilio: Error: #{e.message}"
       end
     end
   end
