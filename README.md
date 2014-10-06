@@ -6,13 +6,13 @@ Fluentd Output plugin to make a call with twilio.
 
 ## Installation
 
-### native gem
-`````
-gem install fluent-plugin-twilio
-`````
+install with gem or fluent-gem command as:
 
-### td-agent gem
 `````
+### system installed gem
+gem install fluent-plugin-twilio
+
+### td-agent bundled gem
 /usr/lib64/fluent/ruby/bin/fluent-gem install fluent-plugin-twilio
 `````
 
@@ -35,10 +35,17 @@ fluent_logger.post('notify.call', {
 
 <match notify.call>
   type twilio
+
+  # Set account Sid and Token from twilio.com/user/account
   account_sid     TWILIO_ACCOUNT_SID           # Required
   auth_token      TWILIO_AUTH_TOKEN            # Required
-  from_number     +81312345678                 # Required with country code
-  default_number  +819012345678,+818012345678  # Optional with to number(comma separated)
+
+  # Set caller ID with country code
+  from_number     +81312345678                 # Required
+
+  # Set defaults of making outbound call.
+  # To call multiple phone at the same time, list them with comma like below.
+  default_number  +819012345678,+818012345678  # Optional
 </match>
 `````
 
