@@ -41,7 +41,7 @@ class Fluent::TwilioOutput < Fluent::Output
 
     client = Twilio::REST::Client.new(@account_sid, @auth_token)
     account = client.account
-    number.split(',').each do |to_number|
+    number.gsub(' ', '').split(',').each do |to_number|
       begin
         call = account.calls.create({:from => @from_number, :to => to_number, :url => url})
       rescue => e
