@@ -2,7 +2,7 @@ class Fluent::TwilioOutput < Fluent::Output
   Fluent::Plugin.register_output('twilio', self)
 
   config_param :account_sid, :string
-  config_param :auth_token, :string
+  config_param :auth_token, :string, :secret => true
   config_param :from_number, :string, :default => ''
   config_param :default_number, :string, :default => ''
   config_param :default_voice, :string, :default => 'woman'
