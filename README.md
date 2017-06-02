@@ -55,8 +55,8 @@ fluent_logger.post('notify.call', {
   # To call multiple phone at the same time, list them with comma like below.
   default_number  +819012345678,+818012345678  # Optional
 
-  # Set log level to prevent info error for Fluentd v0.10.43 or later.
-  log_level       warn
+  # Set log level to prevent info error
+  @log_level       warn
 </match>
 `````
 
