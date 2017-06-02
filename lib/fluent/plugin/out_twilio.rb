@@ -48,7 +48,7 @@ class Fluent::TwilioOutput < Fluent::Output
     account = client.account
     number.gsub(' ', '').split(',').each do |to_number|
       begin
-        call = account.calls.create({from: @from_number, to: to_number, url: url})
+        account.calls.create({from: @from_number, to: to_number, url: url})
       rescue => e
         log.error "twilio: Error: #{e.message}"
       end
