@@ -11,8 +11,8 @@ class TwilioOutputTest < Test::Unit::TestCase
     from_number  +8112345678
   ]
 
-  def create_driver(conf=CONFIG,tag='test')
-    Fluent::Test::OutputTestDriver.new(Fluent::TwilioOutput, tag).configure(conf)
+  def create_driver(conf=CONFIG)
+    Fluent::Test::Driver::Output.new(Fluent::Plugin::TwilioOutput).configure(conf)
   end
 
   def test_configure
@@ -44,12 +44,12 @@ class TwilioOutputTest < Test::Unit::TestCase
 
 
   def test_emit
-    d1 = create_driver(CONFIG, 'notify.call')
-    d1.run do
-      d1.emit({'message' => 'hello world.'})
+    d1 = create_driver(CONFIG)
+    d1.run(default_tag: 'notify.call') do
+      d1.feed({'message' => 'hello world.'})
     end
-    emits = d1.emits
-    assert_equal 0, emits.length
+    events = d1.events
+    assert_equal 0, events.length
   end
 end
 

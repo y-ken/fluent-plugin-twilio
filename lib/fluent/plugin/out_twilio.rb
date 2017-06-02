@@ -1,4 +1,9 @@
-class Fluent::TwilioOutput < Fluent::Output
+require 'uri'
+require 'twilio-ruby'
+
+require 'fluent/plugin/output'
+
+class Fluent::Plugin::TwilioOutput < Fluent::Plugin::Output
   Fluent::Plugin.register_output('twilio', self)
 
   config_param :account_sid, :string
@@ -10,30 +15,17 @@ class Fluent::TwilioOutput < Fluent::Output
 
   VOICE_MAP = ['man', 'woman']
 
-  # Define `log` method for v0.10.42 or earlier
-  unless method_defined?(:log)
-    define_method("log") { $log }
-  end
-
-  def initialize
-    super
-    require 'uri'
-    require 'twilio-ruby'
-  end
-
   def configure(conf)
     super
 
   end
 
-  def emit(tag, es, chain)
+  def process(tag, es)
     es.each do |time,record|
       number = record['number'].nil? ? @default_number : record['number']
       @voice = VOICE_MAP.include?(record['voice']) ? record['voice'] : @default_voice
       call(number, record['message'])
     end
-
-    chain.next
   end
 
   def call(number, message)

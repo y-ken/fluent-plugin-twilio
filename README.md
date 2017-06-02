@@ -4,6 +4,14 @@ fluent-plugin-twilio
 ## Overview
 Fluentd Output plugin to make a call with twilio.
 
+## Requirements
+
+| fluent-plugin-twilio | fluentd     | ruby   |
+|----------------------|-------------|--------|
+| >= 0.1.0             | >= v0.14.15 | >= 2.1 |
+| < 0.1.0              | >= v0.12.0  | >= 1.9 |
+
+
 ## Installation
 
 install with gem or fluent-gem command as:
@@ -29,12 +37,12 @@ fluent_logger.post('notify.call', {
 ### Sample
 `````
 <source>
-  type http
+  @type http
   port 8888
 </source>
 
 <match notify.call>
-  type twilio
+  @type twilio
 
   # Set account Sid and Token from twilio.com/user/account
   account_sid     TWILIO_ACCOUNT_SID           # Required
@@ -47,10 +55,35 @@ fluent_logger.post('notify.call', {
   # To call multiple phone at the same time, list them with comma like below.
   default_number  +819012345678,+818012345678  # Optional
 
-  # Set log level to prevent info error for Fluentd v0.10.43 or later.
-  log_level       warn
+  # Set log level to prevent info error
+  @log_level       warn
 </match>
 `````
+
+### Sample to customize messages
+
+You can customize message using [filter_record_transformer](http://docs.fluentd.org/v0.14/articles/filter_record_transformer).
+
+```
+<source>
+  @type http
+  port 8888
+  @label @NOTIFY
+</source>
+
+<label @NOTIFY>
+  <filter>
+    @type record_transformer
+    <record>
+      message message Good news. ${record["name"]} has made a order of ${record["item"]} just now.
+    </record>
+  </filter>
+  <match>
+    @type twilio
+    # snip ...
+  </match>
+</label>
+```
 
 ### Quick Test
 `````
