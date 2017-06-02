@@ -29,12 +29,12 @@ fluent_logger.post('notify.call', {
 ### Sample
 `````
 <source>
-  type http
+  @type http
   port 8888
 </source>
 
 <match notify.call>
-  type twilio
+  @type twilio
 
   # Set account Sid and Token from twilio.com/user/account
   account_sid     TWILIO_ACCOUNT_SID           # Required
