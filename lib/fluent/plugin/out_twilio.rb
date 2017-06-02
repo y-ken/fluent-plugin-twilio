@@ -1,3 +1,6 @@
+require 'uri'
+require 'twilio-ruby'
+
 class Fluent::TwilioOutput < Fluent::Output
   Fluent::Plugin.register_output('twilio', self)
 
@@ -17,8 +20,6 @@ class Fluent::TwilioOutput < Fluent::Output
 
   def initialize
     super
-    require 'uri'
-    require 'twilio-ruby'
   end
 
   def configure(conf)
