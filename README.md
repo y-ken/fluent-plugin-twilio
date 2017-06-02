@@ -4,6 +4,14 @@ fluent-plugin-twilio
 ## Overview
 Fluentd Output plugin to make a call with twilio.
 
+## Requirements
+
+| fluent-plugin-twilio | fluentd     | ruby   |
+|----------------------|-------------|--------|
+| >= 0.1.0             | >= v0.14.15 | >= 2.1 |
+| < 0.1.0              | >= v0.12.0  | >= 1.9 |
+
+
 ## Installation
 
 install with gem or fluent-gem command as:
