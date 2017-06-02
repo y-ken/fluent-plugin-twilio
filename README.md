@@ -1,4 +1,4 @@
-fluent-plugin-twilio
+fluent-plugin-twilio, a plugin for [Fluentd](http://fluentd.org)
 =====================
 
 ## Overview
