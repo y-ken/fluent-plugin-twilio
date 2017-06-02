@@ -20,10 +20,6 @@ class Fluent::Plugin::TwilioOutput < Fluent::Plugin::Output
     define_method("log") { $log }
   end
 
-  def initialize
-    super
-  end
-
   def configure(conf)
     super
 
