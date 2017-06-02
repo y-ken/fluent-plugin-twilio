@@ -1,7 +1,9 @@
 require 'uri'
 require 'twilio-ruby'
 
-class Fluent::TwilioOutput < Fluent::Output
+require 'fluent/plugin/output'
+
+class Fluent::Plugin::TwilioOutput < Fluent::Plugin::Output
   Fluent::Plugin.register_output('twilio', self)
 
   config_param :account_sid, :string
@@ -27,14 +29,12 @@ class Fluent::TwilioOutput < Fluent::Output
 
   end
 
-  def emit(tag, es, chain)
+  def process(tag, es)
     es.each do |time,record|
       number = record['number'].nil? ? @default_number : record['number']
       @voice = VOICE_MAP.include?(record['voice']) ? record['voice'] : @default_voice
       call(number, record['message'])
     end
-
-    chain.next
   end
 
   def call(number, message)
