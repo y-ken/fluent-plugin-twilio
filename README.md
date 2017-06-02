@@ -60,6 +60,31 @@ fluent_logger.post('notify.call', {
 </match>
 `````
 
+### Sample to customize messages
+
+You can customize message using [filter_record_transformer](http://docs.fluentd.org/v0.14/articles/filter_record_transformer).
+
+```
+<source>
+  @type http
+  port 8888
+  @label @NOTIFY
+</source>
+
+<label @NOTIFY>
+  <filter>
+    @type record_transformer
+    <record>
+      message message Good news. ${record["name"]} has made a order of ${record["item"]} just now.
+    </record>
+  </filter>
+  <match>
+    @type twilio
+    # snip ...
+  </match>
+</label>
+```
+
 ### Quick Test
 `````
 # test call to +819012345678 and say "Help! System ABC has down." with woman voice.
