@@ -3,6 +3,8 @@ fluent-plugin-twilio
 
 ## Overview
 Fluentd Output plugin to make a call with twilio.
+Twilio free trial is available to signup at the official website.
+You can try call to your cellphone for free!
 
 ## Requirements
 
@@ -14,14 +16,14 @@ Fluentd Output plugin to make a call with twilio.
 
 ## Installation
 
-install with gem or fluent-gem command as:
+install with gem or td-agent-gem command as:
 
 `````
-### system installed gem
-gem install fluent-plugin-twilio
+### for local fluentd
+$ gem install fluent-plugin-twilio
 
-### td-agent bundled gem
-/usr/lib64/fluent/ruby/bin/fluent-gem install fluent-plugin-twilio
+### for td-agent2 (standard)
+$ sudo td-agent-gem install fluent-plugin-twilio
 `````
 
 ## Configuration
@@ -75,7 +77,7 @@ You can customize message using [filter_record_transformer](http://docs.fluentd.
   <filter>
     @type record_transformer
     <record>
-      message message Good news. ${record["name"]} has made a order of ${record["item"]} just now.
+      message Hi. ${record["name"]} has made a order of ${record["item"]} just now.
     </record>
   </filter>
   <match>
