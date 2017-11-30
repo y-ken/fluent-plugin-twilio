@@ -18,5 +18,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rake"
   s.add_development_dependency "test-unit", ">= 3.1.0"
   s.add_runtime_dependency "fluentd", ">= 0.14.15", "< 2"
-  s.add_runtime_dependency "twilio-ruby"
+  s.add_runtime_dependency "twilio-ruby", "~> 5.5.0"
 end
