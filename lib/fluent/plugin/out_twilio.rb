@@ -29,18 +29,18 @@ class Fluent::Plugin::TwilioOutput < Fluent::Plugin::Output
   end
 
   def call(number, message)
-    response = Twilio::TwiML::Response.new do |r|
-      r.Say message, voice: @voice, language: @language
+    response = Twilio::TwiML::VoiceResponse.new do |r|
+      r.say(message, voice: @voice, language: @language)
     end
-    xml = response.text.sub(/<[^>]+?>/, '')
+    xml = response.to_s.sub(/<[^>]+?>/, '')
     url = "http://twimlets.com/echo?Twiml=#{URI.escape(xml)}"
     log.info "twilio: generateing twiml: #{xml}"
 
     client = Twilio::REST::Client.new(@account_sid, @auth_token)
-    account = client.account
+    account = client.api.account
     number.gsub(' ', '').split(',').each do |to_number|
       begin
-        account.calls.create({from: @from_number, to: to_number, url: url})
+        account.calls.create(from: @from_number, to: to_number, url: url)
       rescue => e
         log.error "twilio: Error: #{e.message}"
       end
