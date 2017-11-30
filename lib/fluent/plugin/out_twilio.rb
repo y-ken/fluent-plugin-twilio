@@ -11,6 +11,7 @@ class Fluent::Plugin::TwilioOutput < Fluent::Plugin::Output
   config_param :from_number, :string, default: ''
   config_param :default_number, :string, default: ''
   config_param :default_voice, :string, default: 'woman'
+  config_param :default_message, :string, default: nil
   config_param :language, :string, default: 'ja-jp'
 
   VOICE_MAP = ['man', 'woman']
@@ -24,7 +25,8 @@ class Fluent::Plugin::TwilioOutput < Fluent::Plugin::Output
     es.each do |time,record|
       number = record['number'].nil? ? @default_number : record['number']
       @voice = VOICE_MAP.include?(record['voice']) ? record['voice'] : @default_voice
-      call(number, record['message'])
+      message = record['message'] || @default_message
+      call(number, message)
     end
   end
 

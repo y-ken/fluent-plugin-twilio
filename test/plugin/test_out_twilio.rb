@@ -20,26 +20,30 @@ class TwilioOutputTest < Test::Unit::TestCase
       d = create_driver('')
     }
     d = create_driver %[
-      account_sid  TWILIO_ACCOUNT_SID
-      auth_token   TWILIO_AUTH_TOKEN
-      from_number  +8112345678
+      account_sid     TWILIO_ACCOUNT_SID
+      auth_token      TWILIO_AUTH_TOKEN
+      from_number     +8112345678
+      default_message test_message
     ]
     assert_equal 'TWILIO_ACCOUNT_SID', d.instance.account_sid
     assert_equal 'TWILIO_AUTH_TOKEN', d.instance.auth_token
     assert_equal '+8112345678', d.instance.from_number
+    assert_equal 'test_message', d.instance.default_message
   end
 
   def test_configure_multinumber
     d = create_driver %[
-      account_sid  TWILIO_ACCOUNT_SID
-      auth_token   TWILIO_AUTH_TOKEN
-      from_number  +8112345678
+      account_sid     TWILIO_ACCOUNT_SID
+      auth_token      TWILIO_AUTH_TOKEN
+      from_number     +8112345678
       default_number  +81123456789,+811234567890
+      default_message test_message
     ]
     assert_equal 'TWILIO_ACCOUNT_SID', d.instance.account_sid
     assert_equal 'TWILIO_AUTH_TOKEN', d.instance.auth_token
     assert_equal '+8112345678', d.instance.from_number
     assert_equal '+81123456789,+811234567890', d.instance.default_number
+    assert_equal 'test_message', d.instance.default_message
   end
 
 
