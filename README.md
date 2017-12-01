@@ -31,8 +31,8 @@ $ sudo td-agent-gem install fluent-plugin-twilio
 ### Message Format
 `````
 fluent_logger.post('notify.call', {
-  :message  => 'Hello World!',   # Required
-  :number   => '+8109012345678'  # Required
+  :number   => '+8109012345678',  # Required if default_number is brank
+  :message  => 'Hello World!'   # Required if default_message is brank
 })
 `````
 
